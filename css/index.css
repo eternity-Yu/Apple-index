@@ -57,6 +57,36 @@ a{
 }
 #ac-gn-menustate:checked~.topnav .ac-gn-list{
 	visibility: visible;
+	transition: transform 0.25s ;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item{
+	/* transition: opacity 0.35s ease-out, transform 0.35s ease-out; */
+	opacity: 1;
+    pointer-events: auto;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(1){
+	transition-delay: 300ms,300ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(2){
+	transition-delay: 350ms,350ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(3){
+	transition-delay: 400ms,400ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(4){
+	transition-delay: 450ms,450ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(5){
+	transition-delay: 500ms,500ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(6){
+	transition-delay: 550ms,550ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(7){
+	transition-delay: 600ms,600ms;
+}
+#ac-gn-menustate:checked~.topnav .ac-gn-list .ac-gn-item:nth-child(8){
+	transition-delay: 650ms,650ms;
 }
 .ac-gn-menuicon-bread{
 	width: 48px;
@@ -84,6 +114,9 @@ a{
 	transition: transform 0.25s;
     transform: translateY(-3px);
 }
+#ac-gn-menustate:checked~.topnav #smallul .bag{
+	transform: translateX(200px);
+}
 #ac-gn-menustate:checked~.topnav #smallul .list .ac-gn-menuicon-bread-top{
 	transition: 0.25s 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
 	transform: rotateZ(45deg);
@@ -98,15 +131,32 @@ a{
 #ac-gn-menustate:checked~.topnav #smallul .list .ac-gn-menuicon-bread-crust-bottom{
 	transform: translateY(0) rotateZ(90deg);
 } 
-/* 
-body{
-	overflow: hidden !important;
-    height: 100% !important;
-}  */
 
 
 
-
+.topnav{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 44px;
+    z-index: 9999;
+    display: block;
+    margin: 0;
+    width: 100%;
+    font-size: 18px;
+    -webkit-user-select: none;
+    transition:all 1s ease 50ms; 
+}
+#ac-gn-menustate:checked~ .topnav {
+	height: 100%;
+    background: #000;
+}
+.topnav {
+    max-height: none;
+    /*-webkit-transition: background 0.35s linear,height 0.35s ease-in;
+    transition: background 0.35s linear,height 0.35s ease-in;*/
+}
  .ac-gn-list{
 	visibility: hidden;
 	width: 100%;
@@ -117,7 +167,7 @@ body{
 	margin: 0; 
     padding: 0 48px;
     background: black;
-    height: 100%;
+    height: 0%;
     z-index: 10;
     box-sizing: border-box;
     text-align: justify;
@@ -127,6 +177,7 @@ body{
 	height: 47px;
 	margin-top: 12px;
 	border-bottom: 1px solid #333;
+	opacity: 0;
 }
 .ac-gn-link{
 	display: block;
@@ -648,7 +699,7 @@ text-align: center;
 .ac-globalfooter .ac-gf-directory-column-section-list{
 }
 .ac-gf-directory-section-link{
-	color: #666;
+	color: #333;
 }
 
 .ac-globalfooter .ac-gf-footer{
@@ -759,11 +810,19 @@ text-align: center;
 	}
 	.ac-gf-directory-column-section{
 		border-bottom: 1px solid #ddd;
+		background: #f2f2f2;
+		overflow: hidden;
+		pointer-events: auto;
+		position: relative;
+		z-index: 100;
 	}
 	.ac-gf-directory-column-section-list{
 		visibility: hidden;
 		/* display: none; */
 		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
 	}  
 	.ac-globalfooter .ac-gf-content .ac-gf-directory-column-section .ac-gf-directory-column-section-list .ac-gf-directory-section-link{
 		padding: 0 14px;
@@ -776,6 +835,10 @@ text-align: center;
 		line-height: 2.78571em;
 		font-size: 14px;
 		cursor: pointer;
+		position: relative;
+		z-index: 1;
+		background: #f2f2f2;
+		overflow: hidden;
 	}
 	.ac-globalfooter .ac-gf-content .ac-gf-directory .ac-gf-directory-column .ac-gf-directory-column-section h3:after{
 		content: "+";
@@ -790,10 +853,17 @@ text-align: center;
 	#ac-gf-directory-column-section-state-products:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
 	}
+	.ac-globalfooter .ac-gf-directory-column-section-list {
+		z-index: -1;
+		transform: translateY(-100px);
+	}
 	#ac-gf-directory-column-section-state-products:checked+.ac-gf-directory-column-section .ac-gf-directory-column-section-list{
+		z-index: -1;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	#ac-gf-directory-column-section-state-storeservices:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
@@ -802,6 +872,8 @@ text-align: center;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	#ac-gf-directory-column-section-state-education:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
@@ -810,6 +882,8 @@ text-align: center;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	#ac-gf-directory-column-section-state-business:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
@@ -818,6 +892,8 @@ text-align: center;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	#ac-gf-directory-column-section-state-accounts:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
@@ -826,6 +902,8 @@ text-align: center;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	#ac-gf-directory-column-section-state-responsibility:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
@@ -834,6 +912,8 @@ text-align: center;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	#ac-gf-directory-column-section-state-about:checked+.ac-gf-directory-column-section h3:after{
 		transform: rotate(45deg) scale(1.08);
@@ -842,6 +922,8 @@ text-align: center;
 		visibility: visible;
 		/* display: block; */
 		position: static;
+		transform: none;
+		transition: transform 300ms ease;
 	}
 	.ac-globalfooter .ac-gf-footer-locale{
 		float: none;
